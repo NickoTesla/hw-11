@@ -1,3 +1,4 @@
+from datetime import date
 from collections import UserDict
 
 
@@ -67,7 +68,7 @@ def value(self, value):
 
 class Record:
     def __init__(self, name, phone=None, birthday=None):
-        self.name = Name(name)
+        self.name = name
         self.birthday = birthday
         self.phones = []
         if phone:
