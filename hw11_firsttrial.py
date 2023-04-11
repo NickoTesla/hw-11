@@ -19,22 +19,30 @@ class Name(Field):
     pass
 
 
-class Phone(Field):
+class Phone():
     def __init__(self, value):
-        super().__init__(value)
-        self.validate(value)
+        self.__value = None
+        self.value = value
 
-    def validate(self, value):
-        super().validate(value)
+    @property
+    def value(self):
+        return self.__value
+
+    @value.setter
+    def value(self, value):
         if not value.isdigit() or len(value) != 10:
             raise ValueError('Invalid phone number')
+        self.__value = value
 
-    def __set__(self, instance, value):
-        try:
-            self.validate(value)
-            self._value = value
-        except ValueError as e:
-            print(e)
+
+phone = Phone('0998765656')
+print(phone.value)
+try:
+    phone.value = "dfsgsg"
+except ValueError as e:
+    print(e)
+
+print(phone.value)
 
 
 class Birthday(Field):
